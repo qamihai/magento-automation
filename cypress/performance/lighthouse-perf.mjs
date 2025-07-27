@@ -8,6 +8,7 @@ const url = 'https://magento.softwaretestingboard.com/men/tops-men/jackets-men.h
 const chrome = await chromeLauncher.launch({chromeFlags: ['--headless']});
 const options = {logLevel: 'info', output: 'html', onlyCategories: ['performance'], port: chrome.port};
 const runnerResult = await lighthouse(url, options);
+const reportDir = 'cypress/performance';
 
 // Save HTML report
 const reportHtml = runnerResult.report;
