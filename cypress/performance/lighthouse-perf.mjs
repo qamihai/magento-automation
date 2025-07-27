@@ -1,6 +1,7 @@
 import lighthouse from 'lighthouse';
 import * as chromeLauncher from 'chrome-launcher';
 import fs from 'fs';
+import path from 'path';
 
 const url = 'https://magento.softwaretestingboard.com/men/tops-men/jackets-men.html';
 
@@ -10,7 +11,7 @@ const runnerResult = await lighthouse(url, options);
 
 // Save HTML report
 const reportHtml = runnerResult.report;
-fs.writeFileSync('lighthouse-report.html', reportHtml);
+fs.writeFileSync(path.join(reportDir, 'lighthouse-report.html'), reportHtml);
 
 // Log performance score and response time
 const perfScore = runnerResult.lhr.categories.performance.score * 100;
