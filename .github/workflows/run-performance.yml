@@ -1,0 +1,33 @@
+name: Lighthouse Performance Audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install lighthouse chrome-launcher
+
+      - name: Run Lighthouse script
+        run: node cypress/performance/lighthouse-perf.mjs
+
+      - name: Upload Lighthouse HTML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: cypress/performance/lighthouse-report.html
